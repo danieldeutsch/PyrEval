@@ -487,12 +487,16 @@ def addAll(treelists, treelists_ind, segmentlist, st):
                 leftnodes.append(lf)
     while len(leftnodes) > 0:
         for node in leftnodes:
+            removed = False
             for i, lst in enumerate(treelists_ind):
                 if node[1] + 1 in lst or node[1] - 1 in lst:
                     treelists[i].append(node)
                     lst.append(node[1])
                     leftnodes.remove(node)
+                    removed = True
                     break
+            if not removed:
+                leftnodes.remove(node)
     return treelists, treelists_ind
 
 def splitAll(list1, list2, treelist):
